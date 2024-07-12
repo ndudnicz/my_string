@@ -6,9 +6,11 @@
 #include <stdio.h>
 
 int main(int ac, char **av) {
-    t_string *str1 = init_string(NULL);
-    t_string *str2 = init_string("yo\n");
-    t_string *str3 = concat_t_string(init_string("hello "), init_string("there"));
+    t_string *str1 = alloc_str_t_string(NULL);
+    t_string *str2 = alloc_str_t_string("yo\n");
+    t_string *str3_1 = alloc_str_t_string("hello ");
+    t_string *str3_2 = alloc_str_t_string("there");
+    t_string *str3 = concat_t_string(str3_1, str3_2);
     t_string *str4 = concat_t_string(str1, str2);
 
     print_string(str3);
@@ -22,5 +24,17 @@ int main(int ac, char **av) {
     printf("%p\n", str3);
     explain_t_string(str3);
     explain_t_string(str_dup3);
+    int result = replace_char_t_string(str3, 'e', '0');
+    printf("replace_char_t_string: %d\n", result);
+    explain_t_string(str3);
+    result = replace_substr_t_string(str3, "llo", "YOLO");
+    printf("replace_substr_t_string: %d\n", result);
+    explain_t_string(str3);
+    free_t_string(&str1);
+    free_t_string(&str2);
+    free_t_string(&str3);
+    free_t_string(&str3_1);
+    free_t_string(&str3_2);
+    free_t_string(&str4);
     return 0;
 }
