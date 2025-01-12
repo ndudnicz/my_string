@@ -1,6 +1,7 @@
 SRCS =	my_string_operations.c \
 		my_string_print.c \
 		my_string_alloc.c \
+		my_string_cmp.c \
 
 O_FILES = $(SRCS:.c=.o)
 

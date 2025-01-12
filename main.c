@@ -1,8 +1,6 @@
 #include "my_string.h"
 #include <string.h>
 #include <unistd.h>
-#include <stdlib.h>
-#include <string.h>
 #include <stdio.h>
 
 int main(int ac, char **av) {
@@ -36,5 +34,11 @@ int main(int ac, char **av) {
     free_t_string(&str3_1);
     free_t_string(&str3_2);
     free_t_string(&str4);
+
+    t_string **objs = va_alloc_str_t_string(3, "hello", "world", "!");
+    for (int i = 0; i < 3; i++) {
+        explain_t_string(objs[i]);
+        free_t_string(&objs[i]);
+    }
     return 0;
 }
