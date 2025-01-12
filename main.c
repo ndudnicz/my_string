@@ -2,6 +2,7 @@
 #include <string.h>
 #include <unistd.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 int main(int ac, char **av) {
     t_string *str1 = alloc_str_t_string(NULL);
@@ -34,11 +35,15 @@ int main(int ac, char **av) {
     free_t_string(&str3_1);
     free_t_string(&str3_2);
     free_t_string(&str4);
+    free_t_string(&str_dup1);
+    free_t_string(&str_dup3);
 
     t_string **objs = va_alloc_str_t_string(3, "hello", "world", "!");
     for (int i = 0; i < 3; i++) {
         explain_t_string(objs[i]);
         free_t_string(&objs[i]);
     }
+    free(objs);
+
     return 0;
 }
