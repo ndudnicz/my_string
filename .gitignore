@@ -3,3 +3,4 @@ a.out
 *.o
 .idea
 cmake-build-debug/
+a.out.dSYM/

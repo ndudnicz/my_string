@@ -18,6 +18,7 @@ t_string        *dup_t_string(const t_string *obj);
 int             explain_t_string(const t_string *obj);
 int             replace_char_t_string(const t_string *obj, char search, char replace);
 int             replace_substr_t_string(t_string *obj, const char *search, const char *replace);
+int             remove_substr_t_string(t_string *obj, const char *search);
 int             strcmp_t_string(const t_string *s1, const t_string *s2);
 
 #endif
