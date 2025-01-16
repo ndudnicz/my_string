@@ -4,3 +4,4 @@ a.out
 .idea
 cmake-build-debug/
 a.out.dSYM/
+tests/bin/test*

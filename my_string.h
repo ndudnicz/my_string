@@ -1,15 +1,17 @@
 #ifndef __MY_STRING__
 # define __MY_STRING__
 
+# include <unistd.h>
+
 typedef struct  my_string
 {
     char    *value;
-    int     len;
+    size_t  len;
 }               t_string;
 
 t_string        *alloc_str_t_string(const char *str);
-t_string        **va_alloc_str_t_string(int n, ...);
-t_string        *alloc_param_t_string(char c, int len);
+t_string        **va_alloc_str_t_string(size_t n, ...);
+t_string        *alloc_param_t_string(char c, size_t len);
 void            free_t_string(t_string **obj);
 int             print_string(const t_string *obj);
 t_string        *concat_string(const char *s1, const char *s2);

@@ -4,14 +4,6 @@
 #include <stdio.h>
 #include <unistd.h>
 
-void    free_t_string(t_string **obj)
-{
-    free((*obj)->value);
-    (*obj)->value = NULL;
-    free(*obj);
-    *obj = NULL;
-}
-
 t_string    *concat_string(const char *s1, const char *s2)
 {
     const int s1len = strlen(s1);
@@ -55,28 +47,32 @@ int     replace_char_t_string(const t_string *obj, const char search, const char
 
 // replace the substr search with replace in obj->value
 // return the number of replacements
-int replace_substr_t_string(t_string *obj, const char *search, const char *replace) {
-    if (obj->len == 0) {
+int replace_substr_t_string(t_string *obj, const char *search, const char *replace)
+{
+    if (obj->len == 0)
         return 0;
-    }
-
     const int search_len = strlen(search);
     const int replace_len = strlen(replace);
     int count = 0;
     int new_len = 0;
     int i = 0;
     // First pass: calculate the new length of the string after replacements
-    while (i < obj->len) {
-        if (strncmp(obj->value + i, search, search_len) == 0) {
+    while (i < obj->len)
+    {
+        if (strncmp(obj->value + i, search, search_len) == 0)
+        {
             count++;
             new_len += replace_len;
             i += search_len;  // skip over the replaced substring
-        } else {
+        }
+        else
+        {
             new_len++;
             i++;
         }
     }
-    if (count == 0) {
+    if (count == 0)
+    {
         return 0;  // No replacements, return early
     }
     // Allocate memory for the new string
@@ -84,12 +80,16 @@ int replace_substr_t_string(t_string *obj, const char *search, const char *repla
     int j = 0;
     i = 0;
     // Second pass: build the new string with replacements
-    while (i < obj->len) {
-        if (strncmp(obj->value + i, search, search_len) == 0) {
+    while (i < obj->len)
+    {
+        if (strncmp(obj->value + i, search, search_len) == 0)
+        {
             memcpy(new_value + j, replace, replace_len);
             j += replace_len;
             i += search_len;  // skip over the replaced substring
-        } else {
+        }
+        else
+        {
             new_value[j++] = obj->value[i++];
         }
     }

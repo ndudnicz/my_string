@@ -14,5 +14,5 @@ int     print_string(const t_string *obj)
 
 int     explain_t_string(const t_string *obj)
 {
-    return printf("obj(%p): { len: %d, value(%p): '%s' }\n", obj, obj->len, obj->value, obj->value);
+    return printf("obj(%p): { len: %ld, value(%p): '%s' }\n", obj, obj->len, obj->value, obj->value);
 }
