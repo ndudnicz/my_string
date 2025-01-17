@@ -7,7 +7,7 @@
 /* alloc_str_t_string */
 void    test_alloc_str_t_string_null()
 {
-    const char  *MSG = "tests_my_string_alloc.tests_alloc_str_t_string_null";
+    const char  *MSG = "tests_my_string_alloc.test_alloc_str_t_string_null";
     bool        error = false;
     start_test(MSG);
 
@@ -23,7 +23,7 @@ void    test_alloc_str_t_string_null()
 
 void    test_alloc_str_t_string_not_null()
 {
-    const char  *MSG = "tests_my_string_alloc.tests_alloc_str_t_string_not_null";
+    const char  *MSG = "tests_my_string_alloc.test_alloc_str_t_string_not_null";
     bool        error = false;
     start_test(MSG);
 
@@ -48,7 +48,7 @@ void    test_alloc_str_t_string_not_null()
 /* alloc_param_t_string */
 void    test_alloc_param_t_string_null()
 {
-    const char  *MSG = "tests_my_string_alloc.tests_alloc_param_t_string_null";
+    const char  *MSG = "tests_my_string_alloc.test_alloc_param_t_string_null";
     bool        error = false;
     start_test(MSG);
 
@@ -64,7 +64,7 @@ void    test_alloc_param_t_string_null()
 
 void    test_alloc_param_t_string_not_null()
 {
-    const char      *MSG = "tests_my_string_alloc.tests_alloc_param_t_string_not_null";
+    const char      *MSG = "tests_my_string_alloc.test_alloc_param_t_string_not_null";
     bool            error = false;
     start_test(MSG);
 
@@ -93,7 +93,7 @@ void    test_alloc_param_t_string_not_null()
 /* dup_t_string */
 void    test_dup_t_string_null()
 {
-    const char  *MSG = "tests_my_string_alloc.tests_dup_t_string_null";
+    const char  *MSG = "tests_my_string_alloc.test_dup_t_string_null";
     bool        error = false;
     start_test(MSG);
 
@@ -111,7 +111,7 @@ void    test_dup_t_string_null()
 
 void    test_dup_t_string_not_null()
 {
-    const char  *MSG = "tests_my_string_alloc.tests_dup_t_string_not_null";
+    const char  *MSG = "tests_my_string_alloc.test_dup_t_string_not_null";
     bool        error = false;
     start_test(MSG);
 
@@ -135,6 +135,50 @@ void    test_dup_t_string_not_null()
     end_test(MSG, !error);
 }
 
+/* va_alloc_str_t_string */
+void    test_va_alloc_str_t_string_null()
+{
+    const char  *MSG = "tests_my_string_alloc.test_va_alloc_str_t_string_null";
+    bool        error = false;
+    start_test(MSG);
+
+    t_string    **array_null = va_alloc_str_t_string(0);
+    bool test_value_null = test_assert(array_null == NULL, "array_null == NULL");
+    error = !test_value_null;
+
+    end_test(MSG, !error);
+}
+
+bool    test_va_array_values(t_string **array, char **values, size_t n)
+{
+    for (size_t i = 0; i < n; i++)
+    {
+        if (strcmp(array[i]->value, values[i]) != 0)
+            return false;
+    }
+    return true;
+}
+
+void    test_va_alloc_str_t_string_not_null()
+{
+    const char  *MSG = "tests_my_string_alloc.test_va_alloc_str_t_string_not_null";
+    bool        error = false;
+    start_test(MSG);
+
+    size_t  len = 5;
+    char    *values[] = { "VA", "ALLOC", "STR", "T", "STRING" };
+
+    t_string    **array = va_alloc_str_t_string(len, values[0], values[1], values[2], values[3], values[4]);
+    bool test_alloc = test_assert(array != NULL, "array != NULL");
+    error = !test_alloc;
+    bool test_values = test_assert(test_va_array_values(array, values, len), "array values check");
+    error = !test_values;
+    for (size_t i = 0; i < len; i++)
+        free_t_string(&array[i]);
+
+    end_test(MSG, !error);
+}
+
 int     main()
 {
     /* alloc_str_t_string */
@@ -149,4 +193,8 @@ int     main()
     title("DUP_T_STRING");
     test_dup_t_string_null();
     test_dup_t_string_not_null();
+    /* va_alloc_str_t_string */
+    title("VA_ALLOC_STR_T_STRING");
+    test_va_alloc_str_t_string_null();
+    test_va_alloc_str_t_string_not_null();
 }

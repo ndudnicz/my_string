@@ -36,6 +36,8 @@ t_string    *dup_t_string(const t_string *obj)
 
 t_string    **va_alloc_str_t_string(const size_t n, ...)
 {
+    if (n == 0)
+        return NULL;
     t_string    **objs = malloc(sizeof(t_string*) * n);
     va_list     ap;
 

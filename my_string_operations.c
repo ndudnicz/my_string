@@ -36,7 +36,7 @@ int     replace_char_t_string(const t_string *obj, const char search, const char
     if (obj->len == 0)
         return 0;
     int count = 0;
-    for (int i = 0; i < obj->len; i++) {
+    for (size_t i = 0; i < obj->len; i++) {
         if (obj->value[i] == search) {
             obj->value[i] = replace;
             count++;
@@ -55,7 +55,7 @@ int replace_substr_t_string(t_string *obj, const char *search, const char *repla
     const int replace_len = strlen(replace);
     int count = 0;
     int new_len = 0;
-    int i = 0;
+    size_t i = 0;
     // First pass: calculate the new length of the string after replacements
     while (i < obj->len)
     {
